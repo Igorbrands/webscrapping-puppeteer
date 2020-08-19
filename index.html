@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram Puppeteer Printer</title>
+  </head>
+  <body>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      li {
+        list-style: none;
+      }
+      li img {
+        max-width: 60%;        
+      }
+    </style>
+
+    <div class="container"></div>
+
+    <script>
+      (async () => {
+        const response = await fetch('./instagram.json');
+        const data = await response.json();
+
+        //formata os dados para enviar para o html
+        const htmlList = data
+          .map(({ src }) => `<li><image src="${src}"></li>`)
+          .join('');
+
+        //colocar os dados dentro do html
+        document.querySelector('.container').innerHTML = htmlList;
+      })();
+    </script>
+  </body>
+</html>
